@@ -79,6 +79,10 @@ progress::-webkit-progress-value {
   border: 0.01em solid rgba(var(--accent),0.5) !important;
 }
 
+.upNextDialog-countdownText {
+  color: rgba(var(--accent));
+}
+
 .mdl-spinner__layer-1 {
   border-color: rgba(var(--accent));
 }
@@ -94,4 +98,11 @@ progress::-webkit-progress-value {
 }
 * {
   scrollbar-color: rgba(var(--accent),0.8) #0000 !important;
+}
+
+
+/* Syncplay theming*/
+.syncPlayIconCircle {
+  color: rgba(var(--accent),1) !important;
+  text-shadow: none !important;
 }

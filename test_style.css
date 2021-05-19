@@ -2,6 +2,8 @@
   font-family: 'Quicksand', sans-serif;
 }
 
+:root {--rounding: 5px;}
+
 /*Narrow margins, theme main page*/
 .cardBox-bottompadded {
     margin-bottom: 0.6em !important;
@@ -90,7 +92,7 @@
   background-color: #0000 !important; box-shadow: none !important;
 }
 
-/*Correct image aspect ratio behaviour, set border-radius to zero for square tiles, still part of cast theming*/
+/*Correct image aspect ratio behaviour, set border-radius to zero for square tiles*/
 
 @media all and (min-width: 131.25em){
   #castContent .cardScalable {
@@ -148,13 +150,17 @@
 }
 
 /*Tweak series/movie/album title screen*/
+.detailImageContainer .card {
+  position:fixed;
+}
+
+.mainDetailButtons {
+	font-size: 120%;
+}
 @media all and (max-width: 100em){
   .mainDetailButtons {
 	  font-size: 155%;
 	}
-}
-.mainDetailButtons {
-	font-size: 120%;
 }
 
 .detailSectionContent {
@@ -169,37 +175,9 @@
 .detailPagePrimaryContainer {
   background: rgba(0,0,0,0) !important;
 }
-@media all and (min-width: 100em){
-  .itemBackdrop::after {
-    background-color: rgba(0, 0, 0, 0) !important;
-  }
-  .itemBackdrop {
-    height: 23vh !important; 
-    background-image: none !important;
-  }
-}
-@media all and (min-width: 32em) and (max-width: 100em){
-  .itemBackdrop::after {
-    background-color: rgba(0, 0, 0, 0) !important;
-  }
-  .itemBackdrop {
-    height: 12em !important; 
-    background-image: none !important;
-  }
-}
-@media all and (max-width: 32em) {
-  .itemBackdrop {
-    width: 100vw!important; 
-    height: 100vh!important; 
-    position: fixed;
-  }
-  .detailPageWrapperContainer {
-    margin-top: 5em;
-  }
-  .itemBackdrop {
-    filter: blur(45px) saturate(200%) contrast(160%) brightness(25%);
-  }
-}
+
+/*Remove backdrop tweaks that no longer work for 10.7.0*/
+
 
 
 /*Size episode preview images in a more compact way*/
@@ -238,7 +216,7 @@
   .secondary.listItem-overview.listItemBodyText {height: 2.5em; margin: 0;}
 }
 
-/*Achieves similar effect without use of mask-image, foregoing the cool fade effect*/
+/*Banner transparency*/
 #dashboardPage,
 #dashboardGeneralPage,
 #userProfilesPage,
@@ -252,8 +230,8 @@
 #notificationSettingsPage,
 #scheduledTasksPage,
 #itemDetailPage {
-  margin-top: 60px;
-  padding-top: 0px !important;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0px, rgba(0, 0, 0, 0) 60px, rgb(0, 0, 0) 90px);
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0px, rgba(0, 0, 0, 0) 60px, rgb(0, 0, 0) 90px);
   overflow: scroll;
 }
 
@@ -262,16 +240,16 @@
   #moviesPage,
   #tvRecommendedPage,
   #musicRecommendedPage {
-    margin-top: 70px;
-    padding-top: 0px !important;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0px, rgba(0, 0, 0, 0) 70px, rgb(0, 0, 0) 120px);
+    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0px, rgba(0, 0, 0, 0) 70px, rgb(0, 0, 0) 120px);
     overflow: scroll;
   }
   #encodingSettingsPage,
   #mediaLibraryPage,
   #dlnaSettingsPage,
   #pluginsPage {
-    margin-top: 60px;
-    padding-top: 0px !important;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0px, rgba(0, 0, 0, 0) 60px, rgb(0, 0, 0) 90px);
+    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0px, rgba(0, 0, 0, 0) 60px, rgb(0, 0, 0) 90px);
     overflow: scroll;
   }
 }
@@ -285,9 +263,26 @@
   #dlnaSettingsPage,
   #pluginsPage,
   #musicRecommendedPage {
-    margin-top: 130px;
-    padding-top: 0px !important;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0px, rgba(0, 0, 0, 0) 100px, rgb(0, 0, 0) 130px);
+    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0px, rgba(0, 0, 0, 0) 100px, rgb(0, 0, 0) 135px);
     overflow: scroll;
+    margin-top: 30px;
+  }
+}
+
+@media all and (max-width: 100em){
+  #indexPage,
+	#moviesPage,
+	#tvRecommendedPage,
+	#encodingSettingsPage,
+	#mediaLibraryPage,
+	#dlnaSettingsPage,
+	#pluginsPage,
+	#musicRecommendedPage {
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0px, rgba(0, 0, 0, 0) 100px, rgb(0, 0, 0) 130px);
+    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0px, rgba(0, 0, 0, 0) 100px, rgb(0, 0, 0) 130px);
+    overflow: scroll;
+    margin-top: 20px;
   }
 }
 
@@ -314,6 +309,7 @@
   max-width: 22em;
 }
 
+/*Hide "please login" text, margin is to prevent login form moving too far up*/
 #loginPage h1 {
   display: none
 }
@@ -321,10 +317,12 @@
   margin-top: 50px
 }
 
+/*Hide "manual" and "forgot" buttons}*/
 #loginPage .raised.cancel.block.btnForgotPassword.emby-button {
   display: none
 }
 
+/*Login background*/
 #loginPage {
   background: url(https://i.imgur.com/9vL4iNf.png) !important; 
   background-size: cover !important;
@@ -342,8 +340,6 @@
 }
 
 /*Rounded corners on pretty much everything*/
-:root {--rounding: 5px;}
-
 .formDialogHeader {
   border-top-left-radius: var(--rounding);
   border-top-right-radius: var(--rounding);
@@ -355,6 +351,7 @@
 .cardOverlayContainer {
 	border-radius: var(--rounding) !important;
 }
+.primaryImageWrapper > img,
 .toast,
 .paperList,
 .cardContent,
@@ -378,7 +375,6 @@
 .paper-icon-button-light,
 .innerCardFooter,
 .blurhash-canvas,
-.actionSheetMenuItem:hover,
 .dialog,
 .countIndicator,
 .playedIndicator,
@@ -394,6 +390,8 @@
 .emby-input, 
 .emby-textarea, 
 .emby-select-withcolor,
+.nowPlayingPageImage,
+.upNextDialog-poster-img,
 .cardOverlayButtonIcon {
   border-radius: var(--rounding) !important;
 }
@@ -434,10 +432,16 @@ div[data-role="controlgroup"] a[data-role="button"]:last-child {
  padding-top:0em;
 }
 .sectionTitle {
-	margin-left: .4em !important;
-	margin-top: .2em !important;
-	margin-bottom: .2em !important;
+  margin-left: .4em !important;
+  margin-top: .2em !important;
+  margin-bottom: .2em !important;
 }
+
+/*For 10.7.0*/
+.sectionTitleTextButton > .material-icons {
+  margin: 0 !important;
+}
+
 /*Fix the UI shifting around*/
 .nowPlayingBarCurrentTime {
     width: 6em;
@@ -470,13 +474,12 @@ div[data-role="controlgroup"] a[data-role="button"]:last-child {
 }
 
 /*Accommodate mobile and set positions, I think*/
-.cardIndicators {
+.cardIndicators,
+.listItemIndicators {
   right: 0.3em; 
   top: 0.3em;
 }
-.paper-icon-button-light:hover {
-  background-color: rgba(0,0,0,0);
-}
+
 @media all and (min-width: 70em){
   .cardOverlayFab-primary {
     background-color: #00000000;
@@ -496,13 +499,37 @@ div[data-role="controlgroup"] a[data-role="button"]:last-child {
     padding: 0.3em;
   }
 }
-.button-flat:hover {background: rgba(0,0,0,0.4);}
+
+/*ANIMATIONS*/
+/*Fade as images load*/
+.blurhash-canvas {
+    transition: 0.2s;
+}
+.cardImageContainer {
+    transition: 0.7s;
+}
+
+/*Hover background for buttons*/
+.button-flat:hover {
+	background: rgba(0,0,0,0.4);
+}
 .button-flat {
   padding: .5em !important;
   margin: .2em !important;
 }
 
 /*Some themeing for the dashboard*/
+.visualCardBox {
+  box-shadow: none;
+}
+
+.mdl-switch__input:checked + .mdl-switch__label + .mdl-switch__trackContainer > .mdl-switch__track {
+    background: rgba(120, 120, 120, 0.6);
+}
+.mdl-switch__input:checked + .mdl-switch__label + .mdl-switch__trackContainer > .mdl-switch__thumb {
+    background: white;
+}
+
 .dashboardSection h3 {
   margin-left: 0.5em;
 }
@@ -523,23 +550,40 @@ fieldset {
 
 /*Theme the library scan progress bar*/
 progress {
- background: rgba(0, 0, 0, 0.5) !important;
- border-radius: var(--rounding);
-}
-#divRunningTasks span {
-  color: rgba(255,255,255,0.75) !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  border-radius: var(--rounding);
+  border: 1px solid rgba(255, 255, 255, 0.22);
 }
 progress::-webkit-progress-bar {
-  background: rgba(255,255,255,0.75);
+  background: rgba(0, 0, 0, 0.5) !important;
   border-radius: var(--rounding);
+  border: 0px solid rgba(255, 255, 255, 0.22);
 }
 progress::-moz-progress-bar {
   background-color: rgba(255,255,255,0.75);
-  border-radius: 5px;
+  border-radius: var(--rounding);
 }
 progress::-webkit-progress-value {
   background-color: rgba(255,255,255,0.75);
   border-radius: var(--rounding);
+}
+#divRunningTasks span {
+  color: rgba(255,255,255,0.75) !important;
+}
+
+.taskProgressOuter,
+.taskProgressInner {
+  border-radius: var(--rounding) !important;
+}
+.taskProgressOuter {
+  background: rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+.taskProgressInner {
+  background: rgba(255,255,255,0.75) !important;
+}
+#scheduledTasksPage span {
+  color: rgba(255,255,255,0.75) !important;
 }
 
 /*Shrink the mouseover chapter image when scrobbling*/
@@ -555,6 +599,19 @@ progress::-webkit-progress-value {
 }
 
 /*Color theming*/
+
+/*Theme process progress ring*/
+.progressring-spiner {
+  border-color: rgba(var(--accent));
+  border-width: .35em;
+}
+.progressring {
+    margin: .4em;
+}
+.progressring-bg {
+   display: none;
+}
+
 /*Affects blurhash to remove the saturated colors to fit overall look*/
 .blurhash-canvas {
 	filter: opacity(60%) saturate(60%);
@@ -595,8 +652,17 @@ div[data-role=controlgroup] a[data-role=button]+a[data-role=button] {
 .iconOsdProgressInner {
   background: rgb(255, 255, 255);
 }
+
 .osdHeader {
-  background: rgba(0,0,0,.7) !important;
+  linear-gradient(180deg,rgba(16,16,16,.75),rgba(16,16,16,0));
+}
+
+.nowPlayingPageImage {
+  border: none;
+}
+
+.upNextDialog-countdownText {
+  color: rgba(120, 120, 120, 0.6);
 }
 
 /*Theme buttons and cards*/
@@ -614,9 +680,13 @@ div[data-role=controlgroup] a[data-role=button]+a[data-role=button] {
 .emby-tab-button:hover,
 .selectLabelFocused,
 .inputLabelFocused,
-.textareaLabelFocused {
+.textareaLabelFocused,
+.buttonActive,
+.button-link{
   color: rgba(120, 120, 120, 0.6) !important;
 }
+
+#itemDetailPage .button-link {color: inherit !important;}
 
 .listItemIcon,
 .cardImage,
@@ -666,6 +736,22 @@ a[data-role="button"] {
   background-color: #0000 !important;
 }
 
+/*Improve some menu alignments*/
+.formDialogContent {
+  margin-bottom: 6.2em;
+}
+.dialogContentInner {
+  padding: .5em 1em 1em;
+  padding-right: 1em;
+  padding-left: 1em;
+}
+.listItem-indexnumberleft {
+  margin: 1em;
+}
+.listItem {
+  padding-left: 1em;
+}
+
 /*Tweak entry fields, checkamarks*/
 .selectContainer {
   margin-right: 1em !important;
@@ -694,18 +780,25 @@ a[data-role="button"] {
   border: 0.01em solid rgba(255, 255, 255, 0.22) !important;
 }
 
-/*Colors for loading spinner and other stuff*/
+/*Colors for loading spinner, placeholders, scroll bars*/
 .mdl-spinner__layer-1 {border-color: rgba(255, 255, 255, 1);}
 .mdl-spinner__layer-2 {border-color: rgba(128, 128, 128, 1);}
 .mdl-spinner__layer-3 {border-color: rgba(40, 40, 40, 1);}
 .mdl-spinner__layer-4 {border-color: rgba(0, 0, 0, 1);}
 
-.mainDrawer-scrollContainer,
-.formDialogContent.smoothScrollY {
-  scrollbar-color: #101010 #0000 !important;
+::-webkit-scrollbar-track-piece {
+  background-color: #0000;
 }
-.layout-desktop {
-  scrollbar-color: rgba(255, 255, 255, 0.22) #0000;
+::-webkit-scrollbar-corner {
+  background-color: #0000;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(120,120,120,0.6) !important;
+  border-radius: var(--rounding);
+}
+
+* {
+  scrollbar-color: rgba(120,120,120,0.6) #0000 !important;
 }
 
 .defaultCardBackground1 {
